@@ -1,0 +1,20 @@
+# Core testing
+pytest>=8.0.0
+pytest-sugar>=1.0.0
+
+# Packaging and publishing
+build>=1.2.1
+twine>=5.0.0
+
+# Documentation
+mkdocs>=1.6.0
+mkdocs-material>=9.5.0
+
+# Code style & linting
+black>=24.4.0
+ruff>=0.4.0
+mypy>=1.10.0
+
+# Optional: type stubs for better typing (esp. with Pandas later)
+types-setuptools
+types-pytz
