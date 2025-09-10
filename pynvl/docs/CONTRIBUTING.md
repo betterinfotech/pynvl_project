@@ -40,8 +40,8 @@ This project is still early stage and contributions of all kinds are welcome: bu
    Go to GitHub and open a PR against the **main** branch.
 
 ## Other Notes
-- Use pytest for all tests and palce tests under tests directory
-- Add examples if your change affects usage!  Docuemtation is in docs/ folder.
+- Use pytest for all tests and place tests under tests directory
+- Add examples if your change affects usage!  Documentation is in docs/ folder.
 - Use Python 3.10+
 - Report any bugs
 - Suggest any new helper functions

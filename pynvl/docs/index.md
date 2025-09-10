@@ -1,6 +1,6 @@
 # pynvl
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](../LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 **Helper functions for data engineering and analytics workflows in Python, inspired by PL/SQL.**
 
