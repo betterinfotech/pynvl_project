@@ -1,8 +1,9 @@
 # pynvl
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](docs/LICENSE)
-[![Tests](https://github.com/betterinfotech/pynvl/actions/workflows/tests.yml/badge.svg)](https://github.com/betterinfotech/pynvl/actions)
-[![PyPI version](https://img.shields.io/pypi/v/pynvl.svg)](https://pypi.org/project/pynvl/)
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/betterinfotech/pynvl_project/blob/main/LICENSE)
+[![Tests](https://img.shields.io/badge/tests-pytest-blue)](https://github.com/betterinfotech/pynvl_project/actions)
+[![TestPyPI](https://img.shields.io/badge/TestPyPI-pynvl--test-informational)](https://test.pypi.org/project/pynvl-test/)
+
 
 **Helper functions for data engineering and analytics workflows in Python, inspired by PL/SQL.**
 
@@ -26,4 +27,4 @@ It’s designed for Python developers who need simple, reliable transformations 
 
 ### From TestPyPI (sandbox)
 ```bash
-pip install --index-url https://test.pypi.org/simple/ --no-deps pynvl
+pip install --index-url https://test.pypi.org/simple/ --no-deps pynvl-test

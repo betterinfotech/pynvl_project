@@ -1,0 +1,20 @@
+# Python / build
+__pycache__/
+*.pyc
+.build/
+build/
+dist/
+*.egg-info/
+src/*.egg-info/
+.eggs/
+
+# Env / tools
+.venv/
+.env
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# IDE
+.idea/
+

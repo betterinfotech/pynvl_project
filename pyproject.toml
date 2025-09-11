@@ -1,6 +1,6 @@
 [project]
 name = "pynvl-test"                # must exactly match your token scope
-version = "0.1.2"                  # bump so TestPyPI accepts it
+version = "0.1.4"                  # bump so TestPyPI accepts it
 description = "Helper functions for data engineering and analytics workflows in Python, inspired by PL/SQL."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -19,9 +19,10 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/betterinfotech/pynvl"
-Documentation = "https://betterinfotech.github.io/pynvl/"
-Issues = "https://github.com/betterinfotech/pynvl/issues"
+Homepage   = "https://github.com/betterinfotech/pynvl_project"
+Source     = "https://github.com/betterinfotech/pynvl_project"
+Issues     = "https://github.com/betterinfotech/pynvl_project/issues"
+Changelog  = "https://github.com/betterinfotech/pynvl_project/releases"
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "ruff>=0.5", "mkdocs>=1.6", "mkdocs-material>=9.5"]
