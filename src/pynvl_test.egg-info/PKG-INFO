@@ -1,0 +1,54 @@
+Metadata-Version: 2.4
+Name: pynvl-test
+Version: 0.1.2
+Summary: Helper functions for data engineering and analytics workflows in Python, inspired by PL/SQL.
+Author: Shane Wilson
+License: MIT
+Project-URL: Homepage, https://github.com/betterinfotech/pynvl
+Project-URL: Documentation, https://betterinfotech.github.io/pynvl/
+Project-URL: Issues, https://github.com/betterinfotech/pynvl/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Provides-Extra: dev
+Requires-Dist: pytest>=8; extra == "dev"
+Requires-Dist: ruff>=0.5; extra == "dev"
+Requires-Dist: mkdocs>=1.6; extra == "dev"
+Requires-Dist: mkdocs-material>=9.5; extra == "dev"
+
+# pynvl
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](docs/LICENSE)
+[![Tests](https://github.com/betterinfotech/pynvl/actions/workflows/tests.yml/badge.svg)](https://github.com/betterinfotech/pynvl/actions)
+[![PyPI version](https://img.shields.io/pypi/v/pynvl.svg)](https://pypi.org/project/pynvl/)
+
+**Helper functions for data engineering and analytics workflows in Python, inspired by PL/SQL.**
+
+This package provides concise, battle-tested functions that make common data-wrangling tasks easier.  
+It’s designed for Python developers who need simple, reliable transformations that feel natural in code or Pandas pipelines.
+
+---
+
+## ✨ Features
+
+- `nvl(expr, default)` → coalesce `None` to a default  
+- `decode(expr, search1, result1, ..., default)` → compact conditional mapping  
+- `sign(n)` → return `-1`, `0`, or `1` depending on numeric sign  
+- Special handling: `decode(None, None, ...)` treats `None == None` (faithful to PL/SQL semantics)  
+- Fully tested with `pytest`  
+- MIT Licensed  
+
+---
+
+## 📦 Installation
+
+### From TestPyPI (sandbox)
+```bash
+pip install --index-url https://test.pypi.org/simple/ --no-deps pynvl

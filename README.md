@@ -1,6 +1,6 @@
 # pynvl
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](docs/LICENSE)
 [![Tests](https://github.com/betterinfotech/pynvl/actions/workflows/tests.yml/badge.svg)](https://github.com/betterinfotech/pynvl/actions)
 [![PyPI version](https://img.shields.io/pypi/v/pynvl.svg)](https://pypi.org/project/pynvl/)
 

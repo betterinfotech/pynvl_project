@@ -44,5 +44,6 @@ This project is still early stage and contributions of all kinds are welcome: bu
 - Add examples if your change affects usage!  Documentation is in docs/ folder.
 - Use Python 3.10+
 - Report any bugs
+- run mkdocs serve
 - Suggest any new helper functions
 - You agree that your contributions fall under the same MIT licence as the project.

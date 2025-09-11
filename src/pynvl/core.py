@@ -1,6 +1,7 @@
 from typing import Any
 
-__all__ = ["nvl", "decode", "sign"]
+__all__ = ["nvl", "decode", "sign", "noneif", "nvl2"]
+
 
 def nvl(expr, default):
     """Return expr if not None, else default."""
@@ -14,11 +15,14 @@ _MISSING = object()  # Sentinel to distinguish "not provided" from None
 
 
 def decode(expr: Any, *pairs: Any, default: Any = _MISSING) -> Any:
+    """
+    Conditional mapping with optional trailing implicit default.
+    Special case: within decode, None equals None.
+    """
     implicit_default = _MISSING
     n = len(pairs)
 
     if n == 0:
-        # No pairs at all: match can't happen; fall back to explicit default or None
         return None if default is _MISSING else default
 
     # If odd count, last is implicit default; strip it from pairs
@@ -29,7 +33,7 @@ def decode(expr: Any, *pairs: Any, default: Any = _MISSING) -> Any:
     # Iterate search/result pairs
     it = iter(pairs)
     for search, result in zip(it, it):
-        # For decode, none can equal none.
+        # For decode, None equals None
         if expr == search or (expr is None and search is None):
             return result
 
@@ -49,3 +53,15 @@ def sign(n: float | int) -> int:
     else:
         return 0
 
+
+def _nullif(a: Any, b: Any) -> Any:
+    """Return None if a == b, else a."""
+    return None if a == b else a
+
+
+def noneif(a: Any, b: Any) -> Any:
+    return _nullif(a, b)
+
+
+def nvl2(expr: Any, value_if_not_null: Any, value_if_null: Any) -> Any:
+    return value_if_not_null if expr is not None else value_if_null
