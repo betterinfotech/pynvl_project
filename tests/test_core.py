@@ -1,8 +1,4 @@
-# Prefer this import if you don't re-export in __init__.py:
 from pynvl.core import decode, nvl, sign, noneif, nvl2
-
-# If you DO re-export in pynvl/__init__.py, you can instead do:
-# from pynvl import decode, nvl, sign, noneif, nvl2
 
 
 def test_nvl():
@@ -48,7 +44,6 @@ def test_noneif_basic():
 
 def test_noneif_with_none_and_types():
     assert noneif(None, None) is None
-    # a != b, so return a (which is None) → still None
     assert noneif(None, 0) is None
 
 
