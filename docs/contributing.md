@@ -10,7 +10,7 @@ This project is still early stage and contributions of all kinds are welcome: bu
 1. **Fork the repository**  
    Click the **Fork** button on GitHub and clone your fork.
    ```bash
-   git clone https://github.com/<your-username>/pynvl.git
+   git clone https://github.com/<your-username>/pynvl_project.git
    cd pynvl
 
 2. **Create a feature branch**  

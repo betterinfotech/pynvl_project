@@ -14,9 +14,9 @@ It’s designed for Python developers who need simple, reliable transformations 
 
 ## ✨ Features
 
-- `nvl(expr, default)` → coalesce `None` to a default  
-- `decode(expr, search1, result1, ..., default)` → compact conditional mapping  
-- `sign(n)` → return `-1`, `0`, or `1` depending on numeric sign  
+- `nvl(expr, default)` => coalesce `None` to a default  
+- `decode(expr, search1, result1, ..., default)` => compact conditional mapping  
+- `sign(n)` => return `-1`, `0`, or `1` depending on numeric sign  
 - Special handling: `decode(None, None, ...)` treats `None == None` (faithful to PL/SQL semantics)  
 - Fully tested with `pytest`  
 - MIT Licensed  
