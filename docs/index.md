@@ -11,7 +11,7 @@ It’s complemented by helpers for use with pandas as well which I hope people f
 
 ---
 
-## ✨ Features
+## 🔹 Features
 
 - `nvl(expr, default)` => coalesce `None` to a default  
 - `decode(expr, search1, result1, ..., default)` => compact conditional mapping  
@@ -22,7 +22,7 @@ It’s complemented by helpers for use with pandas as well which I hope people f
 
 ---
 
-## 📊 Pandas Integration
+## 🔹 Pandas Integration
 
 `pynvl` also provides optional pandas-native helpers for use with `pd.Series` and operates element-wise.
 
@@ -50,10 +50,10 @@ print(pd_decode(s, -5, "neg", 0, "zero", 3, "pos", default="other").tolist())
 
 ---
 
-## 📦 Installation From PyPI
+## 🔹 Installation From PyPI
 ```bash
 pip install pynvl-lib
 ```
 ---
 
-## 👉 [Demo page](demo.md)
+## 🔹 [Demo page](demo.md)

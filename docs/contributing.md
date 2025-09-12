@@ -5,7 +5,7 @@ This project is still early stage and contributions of all kinds are welcome: bu
 
 ---
 
-## 🛠️ How to Contribute
+## 🔹 How to Contribute
 
 1. **Fork the repository**  
    Click the **Fork** button on GitHub and clone your fork.
@@ -39,7 +39,7 @@ This project is still early stage and contributions of all kinds are welcome: bu
 6. **Open a Pull Request**  
    Go to GitHub and open a PR against the **main** branch.
 
-## Other Notes
+## 🔹Other Notes
 - Use pytest for all tests and place tests under tests directory
 - Add examples if your change affects usage!  Documentation is in docs/ folder.
 - Use Python 3.10+
