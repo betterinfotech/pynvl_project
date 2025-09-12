@@ -4,6 +4,7 @@ from pynvl.core import decode, nvl, sign, noneif, nvl2
 def test_nvl():
     assert nvl(expr=None, default=5) == 5
     assert nvl(expr=10, default=5) == 10
+    assert nvl(nvl(nvl(None, None), None), "No contacts") == "No contacts"
 
 
 def test_decode_basic_pairs():

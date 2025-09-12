@@ -4,7 +4,9 @@ __all__ = ["nvl", "decode", "sign", "noneif", "nvl2"]
 
 
 def nvl(expr, default):
-    """Return expr if not None, else default."""
+    """
+    - nvl means None Value and is a nod to Oracle nvl (Null value)
+    """
     if expr is None:
         return default
     else:
@@ -16,8 +18,9 @@ _MISSING = object()  # Sentinel to distinguish "not provided" from None
 
 def decode(expr: Any, *pairs: Any, default: Any = _MISSING) -> Any:
     """
-    Conditional mapping with optional trailing implicit default.
-    Special case: within decode, None equals None.
+    - Check expr and find which matching pair it belongs to.
+    - Returns default if no matches found.
+    - NOTE: To stay consistent with Oracle we let None equal None.
     """
     implicit_default = _MISSING
     n = len(pairs)
@@ -25,15 +28,16 @@ def decode(expr: Any, *pairs: Any, default: Any = _MISSING) -> Any:
     if n == 0:
         return None if default is _MISSING else default
 
-    # If odd count, last is implicit default; strip it from pairs
+    # If odd count, last is implicit default.  Strip it from pairs
     if n % 2 == 1:
         implicit_default = pairs[-1]
         pairs = pairs[:-1]
 
     # Iterate search/result pairs
     it = iter(pairs)
+    # Zip iterator with itself to consume items in twos.
     for search, result in zip(it, it):
-        # For decode, None equals None
+        # For consistency with Oracle None equals None
         if expr == search or (expr is None and search is None):
             return result
 
@@ -55,8 +59,10 @@ def sign(n: float | int) -> int:
 
 
 def _nullif(a: Any, b: Any) -> Any:
-    """Return None if a == b, else a."""
-    return None if a == b else a
+    if a == b:
+        return None
+    else:
+        return a
 
 
 def noneif(a: Any, b: Any) -> Any:
@@ -64,4 +70,7 @@ def noneif(a: Any, b: Any) -> Any:
 
 
 def nvl2(expr: Any, value_if_not_null: Any, value_if_null: Any) -> Any:
-    return value_if_not_null if expr is not None else value_if_null
+    if expr is not None:
+        return value_if_not_null
+    else:
+        return value_if_null

@@ -14,7 +14,6 @@ def pd_sign(series: pd.Series) -> pd.Series:
     return out
 
 
-
 def pd_nvl(series: pd.Series, default: Any) -> pd.Series:
     return series.fillna(default)
 
@@ -31,7 +30,6 @@ def pd_noneif(series_a: pd.Series, series_b: pd.Series) -> pd.Series:
     out = series_a.astype("object").copy()
     out.loc[equal] = None
     return out
-
 
 
 def pd_decode(series: pd.Series, *pairs: Any, default: Any = None) -> pd.Series:
