@@ -1,24 +1,33 @@
 name: publish
+
 on:
   push:
-    tags: ["v*"]     # publish when you push a tag like v1.0.0
+    tags: ["v*"]  # publish when you push a tag like v1.0.0
 
 permissions:
   contents: read
-  id-token: write     # required for OIDC
+  id-token: write  # required for PyPI Trusted Publishing (OIDC)
 
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
+    # If you created a GitHub Actions Environment (e.g. "pypi"), uncomment:
+    # environment: pypi
+
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: python -m pip install -U pip build
-      - run: python -m build
-      - uses: pypa/gh-action-pypi-publish@v1
-        # no token needed; OIDC is used automatically
-        # if you set an environment in the ruleset, add:
-        # env:
-        #   PIPY_ENVIRONMENT: pypi
+
+      - name: Build sdist and wheel
+        run: |
+          python -m pip install -U pip build
+          python -m build
+
+      - name: Publish to PyPI (Trusted Publishing)
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          # Safe to leave on; re-runs won't fail if the version already exists
+          skip-existing: true
