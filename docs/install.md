@@ -5,7 +5,7 @@ You can install it from **PyPI**.
 
 ---
 
-## ✅ Install from PyPI
+## 🔹 Install from PyPI
 
 Install the usual way.
 
