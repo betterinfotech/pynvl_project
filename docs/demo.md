@@ -96,7 +96,7 @@ print(nvl2(None, "not-null", "is-null")) # 'is-null'
 ```
 ---
 
-## 📊 Pandas Integration
+## 🔹 Pandas Integration
 
 ```python
 import pandas as pd

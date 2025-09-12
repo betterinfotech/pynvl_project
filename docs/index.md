@@ -1,8 +1,8 @@
 # pynvl
 
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/betterinfotech/pynvl_project/blob/main/LICENSE)
-[![Tests](https://img.shields.io/badge/tests-pytest-blue)](https://github.com/betterinfotech/pynvl_project/actions)
-[![TestPyPI](https://img.shields.io/badge/TestPyPI-pynvl--test-informational)](https://test.pypi.org/project/pynvl-test/)
+[![PyPI](https://img.shields.io/pypi/v/pynvl.svg)](https://pypi.org/project/pynvl-lib/)
+[![PyPI](https://img.shields.io/pypi/v/pynvl.svg)](https://pypi.org/project/pynvl-lib/)
 
 **Helper functions for data engineering in Python, inspired by PL/SQL.**
 
@@ -50,12 +50,10 @@ print(pd_decode(s, -5, "neg", 0, "zero", 3, "pos", default="other").tolist())
 
 ---
 
-## 📦 Installation
-
-### From TestPyPI (sandbox)
+## 📦 Installation From PyPI
 ```bash
-pip install --index-url https://test.pypi.org/simple/ --no-deps pynvl-test
+pip install pynvl-lib
 ```
 ---
 
-## 👉 See the [Demo page](demo.md) for full examples of all functions.
+## 👉 [Demo page](demo.md)
