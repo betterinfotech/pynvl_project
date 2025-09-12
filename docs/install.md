@@ -1,13 +1,14 @@
 # Installation
 
 pynvl is distributed as a standard Python package.  
-You can install it from **TestPyPI** (for sandbox testing) or from **PyPI** (once officially released).
+You can install it from **PyPI**.
 
 ---
 
-## ✅ Install from TestPyPI (sandbox)
+## ✅ Install from PyPI
 
-This is useful while the project is under development and before the first stable release to PyPI.
+Install the usual way.
 
 ```bash
-pip install --index-url https://test.pypi.org/simple/ --no-deps pynvl
+pip install pynvl-lib
+```
