@@ -1,7 +1,8 @@
 site_name: pynvl
 site_description: Helper functions for data engineering and analytics workflows in Python, inspired by PL/SQL
 site_author: Better Info Tech Ltd (Shane Wilson)
-repo_url: https://github.com/betterinfotech/pynvl
+site_url: https://betterinfotech.github.io/pynvl_project/
+repo_url: https://github.com/betterinfotech/pynvl_project
 
 theme:
   name: material
