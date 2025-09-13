@@ -1,7 +1,6 @@
-# 🤝 Contributing to pynvl
+# Contributing to pynvl
 
-Thank you for your interest in contributing! 🎉  
-This project is still early stage and contributions of all kinds are welcome: bug reports, suggestions, code, tests, docs.
+This project is still early stage and contributions of all kinds are welcome.
 
 ---
 
@@ -12,22 +11,26 @@ This project is still early stage and contributions of all kinds are welcome: bu
    ```bash
    git clone https://github.com/<your-username>/pynvl_project.git
    cd pynvl
+   ```
 
 2. **Create a feature branch**  
    Click the **Fork** button on GitHub and clone your fork.
    ```bash
    git checkout -b feature/my-feature
+   ```
 
 3. **Install dependencies in a virtual environment**  
    ```bash
    python -m venv .venv
    .venv\Scripts\activate   # Windows
    pip install -r requirements-dev.txt   # if available
+   ```
 
 4. **Run tests**  
    Click the **Fork** button on GitHub and clone your fork.
    ```bash
    pytest tests/
+   ```
 
 5. **Commit your changes**  
    Click the **Fork** button on GitHub and clone your fork.
@@ -35,6 +38,7 @@ This project is still early stage and contributions of all kinds are welcome: bu
    git add .
    git commit -m "Add: short description of change"
    git push origin feature/my-feature
+   ```
    
 6. **Open a Pull Request**  
    Go to GitHub and open a PR against the **main** branch.
@@ -44,6 +48,6 @@ This project is still early stage and contributions of all kinds are welcome: bu
 - Add examples if your change affects usage!  Documentation is in docs/ folder.
 - Use Python 3.10+
 - Report any bugs
-- run mkdocs serve
+- Run ```mkdocs serve``` locally to preview changes.
 - Suggest any new helper functions
 - You agree that your contributions fall under the same MIT licence as the project.

@@ -3,6 +3,8 @@
 This page gives longer demos of the core `pynvl` functions and their `pd_*` pandas equivalents.
 ---
 ## 🔹 NVL
+### Substitute a value when a `None` value is encountered.
+### `NVL( string1, replace_with)`
 ```python
 from pynvl import nvl
 
@@ -10,6 +12,7 @@ print(nvl(None, 5))      # 5
 print(nvl("hello", 99))  # 'hello'
 
 # Nesting - Use email if exists, fallback to phone then office. Show 'No contacts if all are None.
+email = phone = office = office_extension = None
 print(nvl(nvl(nvl(email, phone), office), "No contacts"))
 
 # Python core
@@ -25,6 +28,8 @@ else:
 ---
 
 ## 🔹 SIGN
+### Returns a value indicating the sign of a number
+### `sign(number)`
 ```python
 from pynvl import sign
 
@@ -36,6 +41,7 @@ print(sign(9))   # 1
 status = {1: "In Credit", 0: "Zero Balance", -1: "Overdrawn"}[sign(balance)]
 
 # If-elif code bloat
+balance = 0
 if balance > 0:
     status = "In Credit"
 elif balance == 0:
@@ -46,11 +52,16 @@ else:
 ---
 
 ## 🔹 DECODE
+### if-elif-else functionality
+### `decode(expression , search , result [, search , result]... [, default] )`
+### If no matches are found, the DECODE function will return default.
+### If default is omitted, then the DECODE function will return None (if no matches are found).
 ```python
 from pynvl import decode
 
 print(decode("A", "A", "Alpha", "B", "Beta", default="Unknown")) # 'Alpha'
 print(decode("Z", "A", "Alpha", "B", "Beta", "Fallback")) # 'Fallback'
+print(decode("Z", "A", "Alpha", "B", "Beta")) # None
 
 # Remove multiple if-elif tests - Clean and easy to read
 status_code = None
@@ -79,20 +90,44 @@ else:
 ---
 
 ## 🔹 NONEIF
+### If expr1 and expr2 are equal, the NONEIF function returns NONE. Otherwise, it returns expr1.
+### `NONEIF( expr1, expr2 )`
 ```python
 from pynvl import noneif
 
 print(noneif(5, 5))   # None
 print(noneif(7, 8))   # 7
+
+primary = "alice@example.com"
+backup = "alice@example.com"
+
+contact = noneif(backup, primary) or primary # alice@example.com
+
+# Code bloat
+if backup == primary:
+    contact = primary
+else:
+    contact = backup if backup is not None else primary
 ```
 ---
 
 ## 🔹 NVL2
+### Lets you substitutes a value when a null value is encountered as well as when a non-null value is encountered.
+### `NVL2( string1, value_if_not_none, value_if_none )`
 ```python
 from pynvl import nvl2
 
-print(nvl2("X", "not-null", "is-null"))  # 'not-null'
-print(nvl2(None, "not-null", "is-null")) # 'is-null'
+print(nvl2("X", "not-none", "is-none"))  # 'not-none'
+print(nvl2(None, "not-none", "is-none")) # 'is-none'
+
+discount_code = "ABC"
+message = nvl2(discount_code, "Discount applied!", "No discount available")
+
+# Bloated...
+if discount_code is not None:
+    message = "Discount applied!"
+else:
+    message = "No discount available"
 ```
 ---
 
