@@ -1,6 +1,6 @@
 [project]
 name = "pynvl-lib"                # must exactly match your token scope
-version = "1.0.2"                  # bump so TestPyPI accepts it
+version = "1.0.3"                  # bump so TestPyPI accepts it
 description = "Helper functions for data engineering and analytics workflows in Python, inspired by PL/SQL."
 readme = "README.md"
 requires-python = ">=3.10"
