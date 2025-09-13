@@ -1,7 +1,6 @@
 # Installation
 
-pynvl is distributed as a standard Python package.  
-You can install it from **PyPI**.
+pynvl is distributed as a standard Python package avaialble from **PyPI**.
 
 ---
 
