@@ -1,12 +1,12 @@
-# 🗺️ Roadmap
+# Roadmap
 
-The `pynvl` package is just getting started.  
+The `pynvl` package is just warming up!  
 Here are the planned enhancements and future directions.
 
 ---
 
 ## 🔹 Core Functions
-- Initial helpers: `nvl`, `decode`, `sign`
+- Initial helpers: `nvl`, `decode`, `sign`, `noneif`, `nvl2`
 -  Add more PL/SQL-inspired helpers:
 - `extract`, `extract_xml`
 
@@ -14,12 +14,12 @@ Here are the planned enhancements and future directions.
 
 ## 🔹 Pandas Integration
 - `pd_nvl(series, default)` => fill `NaN`/`None` with default  
-- `pd_decode(series, mapping, default)` =>map values with fallback  
+- `pd_decode(series, mapping, default)` => map values with fallback  
 - `pd_sign(series)` => vectorized numeric sign  
 
 ---
 
-## 🔹 Regex Helpers (TO DO)
+## 🔹 Regex Helpers
 - `regexp_like(string, pattern)` => boolean match  
 - `regexp_substr(string, pattern, occurrence=1)` => extract substring  
 - `regexp_replace(string, pattern, replacement)` => regex substitution  
@@ -33,7 +33,6 @@ Here are the planned enhancements and future directions.
 
 ## 🔹 Documentation
 - Expand API docs with detailed examples  
-- Tutorials for analysts and data engineers transitioning from SQL  
 
 ---
 
