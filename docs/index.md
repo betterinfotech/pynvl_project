@@ -2,7 +2,6 @@
 
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/betterinfotech/pynvl_project/blob/main/LICENSE)
 [![PyPI](https://img.shields.io/pypi/v/pynvl-lib.svg)](https://pypi.org/project/pynvl-lib/)
-[![PyPI](https://img.shields.io/pypi/v/pynvl-lib.svg)](https://pypi.org/project/pynvl-lib/)
 
 **General purpose data utilities, inspired by PL/SQL.**
 
@@ -15,7 +14,7 @@ This package contains a suite of functions which flatten out data handling opera
 - `nvl(expr, default)` => Substitute a value when `None` is encountered
 - `decode(expr, search1, result1, ..., default)` => if-elif-else functionality  
 - `sign(n)` => Returns a value indicating the sign of a number
-- `noneif(expr1, expr2)` => If expr1 and expr1 are equal then return None
+- `noneif(expr1, expr2)` => If expr1 and expr2 are equal then return None
 - `nvl2(expr, value_if_not_null, value_if_null)` => Extending NVL to substitute when non-None value is encountered
 - Special handling: `decode(None, None, ...)` treats `None == None` (follows PL/SQL)  
 - Fully tested with `pytest`  
@@ -48,7 +47,6 @@ print(pd_noneif(s, 0).tolist())
 print(pd_decode(s, -5, "neg", 0, "zero", 3, "pos", default="other").tolist())
 # ['neg', 'zero', 'pos', 'other']
 ```
-
 ---
 
 ## 🔹 Installation From PyPI

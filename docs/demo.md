@@ -13,9 +13,8 @@ print(nvl("hello", 99))  # 'hello'
 
 # Nesting - Use email if exists, fallback to phone then office. Show 'No contacts if all are None.
 email = phone = office = office_extension = None
-print(nvl(nvl(nvl(email, phone), office), "No contacts"))
 
-# Python core
+# Core Python - If-elif bloat
 if email is not None:
     primary_contact = email
 elif phone is not None:
@@ -24,6 +23,9 @@ elif office_extension is not None:
     primary_contact = office
 else:
     primary_contact = "No contacts"
+
+# With pynvl
+print(nvl(nvl(nvl(email, phone), office), "No contacts"))
 ```
 ---
 
@@ -38,9 +40,9 @@ print(sign(0))   # 0
 print(sign(9))   # 1
 
 # Simplified expressions
-status = {1: "In Credit", 0: "Zero Balance", -1: "Overdrawn"}[sign(balance)]
+balance = 500
 
-# If-elif code bloat
+# Core Python - If-elif bloat
 balance = 0
 if balance > 0:
     status = "In Credit"
@@ -48,6 +50,9 @@ elif balance == 0:
     status = "Zero Balance"
 else:
     status = "Overdrawn"
+
+# With pynvl
+status = {1: "In Credit", 0: "Zero Balance", -1: "Overdrawn"}[sign(balance)]
 ```
 ---
 
@@ -65,16 +70,8 @@ print(decode("Z", "A", "Alpha", "B", "Beta")) # None
 
 # Remove multiple if-elif tests - Clean and easy to read
 status_code = None
-customer_status = decode(
-    status_code,
-    "A", "Active",
-    "B", "Blocked",
-    "C", "Closed",
-    None, "Unknown",
-    default="Other"
-)
 
-# Bloated without decode...
+# Core Python - If-elif bloat
 if status_code == "A":
     customer_status = "Active"
 elif status_code == "B":
@@ -85,7 +82,16 @@ elif status_code is None:
     customer_status = "Unknown"
 else:
     customer_status = "Other"
-
+    
+# With pynvl
+customer_status = decode(
+    status_code,
+    "A", "Active",
+    "B", "Blocked",
+    "C", "Closed",
+    None, "Unknown",
+    default="Other"
+)
 ```
 ---
 
@@ -101,13 +107,14 @@ print(noneif(7, 8))   # 7
 primary = "alice@example.com"
 backup = "alice@example.com"
 
-contact = noneif(backup, primary) or primary # alice@example.com
-
-# Code bloat
+# Core Python - If-else bloat
 if backup == primary:
     contact = primary
 else:
     contact = backup if backup is not None else primary
+
+# With pynvl
+contact = noneif(backup, primary) or primary # alice@example.com
 ```
 ---
 
@@ -121,13 +128,15 @@ print(nvl2("X", "not-none", "is-none"))  # 'not-none'
 print(nvl2(None, "not-none", "is-none")) # 'is-none'
 
 discount_code = "ABC"
-message = nvl2(discount_code, "Discount applied!", "No discount available")
 
-# Bloated...
+# Core Python - If-else bloat
 if discount_code is not None:
     message = "Discount applied!"
 else:
     message = "No discount available"
+
+# With pynvl
+message = nvl2(discount_code, "Discount applied!", "No discount available")  # Discount applied! 
 ```
 ---
 
