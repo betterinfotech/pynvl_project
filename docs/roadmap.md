@@ -42,5 +42,5 @@ Here are the planned enhancements and future directions.
 
 ---
 
-💡 Contributions and ideas are welcome! See [CONTRIBUTING.md](contributing.md)
- for guidelines.
+## 🔹 Contributions
+New ideas are welcome! See [CONTRIBUTING.md](contributing.md) for guidelines.

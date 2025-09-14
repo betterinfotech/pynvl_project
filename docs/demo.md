@@ -1,4 +1,4 @@
-# 🧪 Demo page
+# Demo page
 
 This page gives longer demos of the core `pynvl` functions and their `pd_*` pandas equivalents.
 ---
