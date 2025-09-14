@@ -1,0 +1,35 @@
+name: Docs
+
+on:
+  push:
+    branches: [ main ]   # deploy docs on merges to main
+  workflow_dispatch:      # allow manual trigger
+
+permissions:
+  contents: write         # needed to push to gh-pages
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install MkDocs + theme
+        run: |
+          pip install mkdocs mkdocs-material
+
+      - name: Deploy to GitHub Pages
+        run: |
+          mkdocs gh-deploy --clean --force --no-history -m "docs: CI publish"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy to GitHub Pages
+        run: "mkdocs gh-deploy --clean --force --no-history -m 'docs: CI publish'"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
