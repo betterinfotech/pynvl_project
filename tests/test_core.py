@@ -1,4 +1,4 @@
-from pynvl.core import decode, nvl, sign, noneif, nvl2
+from pynvl.core import decode, nvl, sign, noneif, nvl2, coalesce
 
 
 def test_nvl():
@@ -52,3 +52,11 @@ def test_nvl2():
     assert nvl2("x", "not-null", "is-null") == "not-null"
     assert nvl2(None, "not-null", "is-null") == "is-null"
     assert nvl2(0, "not-null", "is-null") == "not-null"  # 0 is not None
+
+
+def test_coalesce():
+    assert coalesce(None, None, 5, 10) == 5
+    assert coalesce(None, "hello", "world") == "hello"
+    assert coalesce(None, None, None) is None
+    assert coalesce("first", "second") == "first"
+    assert coalesce(None) is None

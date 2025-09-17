@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-from pynvl.pandas_ext import pd_sign, pd_nvl, pd_nvl2, pd_noneif, pd_decode
+from pynvl.pandas_ext import pd_sign, pd_nvl, pd_nvl2, pd_noneif, pd_decode, pd_coalesce
 
 
 def to_list(s: pd.Series):
@@ -31,8 +31,6 @@ def test_pd_noneif_basic_and_null_handling():
     a = pd.Series([1, 2, 3, None, np.nan])
     b = pd.Series([1, 9, 3, None, np.nan])
     out = pd_noneif(a, b)
-    # Expected semantics: return None when equal (including None==None / NaN==NaN), else return a
-    # If your implementation doesn't treat NaN==NaN as equal, update it accordingly.
     assert to_list(out) == [None, 2, None, None, None]
 
 
@@ -54,3 +52,11 @@ def test_pd_decode_implicit_default():
     # Odd number of args after expr → last is implicit default
     out = pd_decode(s, "A", "Alpha", "Implicit")
     assert to_list(out) == ["Implicit", "Alpha"]
+
+
+def test_pd_coalesce_basic():
+    a = pd.Series([None, 2, None, 4])
+    b = pd.Series([1, None, 3, None])
+    c = pd.Series([9, 9, 9, 9])
+    out = pd_coalesce(a, b, c)
+    assert out.astype("object").tolist() == [1, 2, 3, 4]

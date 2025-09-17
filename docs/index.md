@@ -16,7 +16,8 @@ This package contains a suite of functions which flatten out data handling opera
 - `sign(n)` => Returns a value indicating the sign of a number
 - `noneif(expr1, expr2)` => If expr1 and expr2 are equal then return None
 - `nvl2(expr, value_if_not_null, value_if_null)` => Extending NVL to substitute when non-None value is encountered
-- Special handling: `decode(None, None, ...)` treats `None == None` (follows PL/SQL)  
+- `decode(None, None, ...)` treats `None == None` (follows PL/SQL)
+- `coalesce(expr1, expr2, ..., expr_n)` => Returns first non-None value in list
 - Fully tested with `pytest`  
 - MIT Licensed  
 

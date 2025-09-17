@@ -43,13 +43,12 @@ print(sign(9))   # 1
 balance = 500
 
 # Core Python - If-elif bloat
-balance = 0
 if balance > 0:
-    status = "In Credit"
+    status_if = "In Credit"
 elif balance == 0:
-    status = "Zero Balance"
+    status_if = "Zero Balance"
 else:
-    status = "Overdrawn"
+    status_if = "Overdrawn"
 
 # With pynvl
 status = {1: "In Credit", 0: "Zero Balance", -1: "Overdrawn"}[sign(balance)]
@@ -73,15 +72,15 @@ status_code = None
 
 # Core Python - If-elif bloat
 if status_code == "A":
-    customer_status = "Active"
+    customer_status_if = "Active"
 elif status_code == "B":
-    customer_status = "Blocked"
+    customer_status_if = "Blocked"
 elif status_code == "C":
-    customer_status = "Closed"
+    customer_status_if = "Closed"
 elif status_code is None:
-    customer_status = "Unknown"
+    customer_status_if = "Unknown"
 else:
-    customer_status = "Other"
+    customer_status_if = "Other"
     
 # With pynvl
 customer_status = decode(
@@ -109,9 +108,9 @@ backup = "alice@example.com"
 
 # Core Python - If-else bloat
 if backup == primary:
-    contact = primary
+    contact_if = primary
 else:
-    contact = backup if backup is not None else primary
+    contact_if = backup if backup is not None else primary
 
 # With pynvl
 contact = noneif(backup, primary) or primary # alice@example.com
@@ -131,12 +130,37 @@ discount_code = "ABC"
 
 # Core Python - If-else bloat
 if discount_code is not None:
-    message = "Discount applied!"
+    message_if = "Discount applied!"
 else:
-    message = "No discount available"
+    message_if = "No discount available"
 
 # With pynvl
 message = nvl2(discount_code, "Discount applied!", "No discount available")  # Discount applied! 
+```
+---
+
+## 🔹 COALESCE
+## Returns the first non-None expression in the parameter list. If all expressions evaluate to None then coalesce will return None.
+### `COALESCE( expr1, expr2, ..., expr_n)`
+```python
+from pynvl import coalesce
+
+print(coalesce(None, None, 5, 10)) # 5
+
+port_address = None
+ip_address = None
+mac_address = "A1:B2:C3:D4:E5:F6"
+
+# Core Python - If-elif bloat
+if port_address is not None:
+    address_if = port_address
+elif ip_address is not None:
+    address_if = ip_address
+elif mac_address is not None:
+    address_if = mac_address
+
+# With pynvl
+address = coalesce(port_address, ip_address, mac_address) # "A1:B2:C3:D4:E5:F6" 
 ```
 ---
 
@@ -144,7 +168,7 @@ message = nvl2(discount_code, "Discount applied!", "No discount available")  # D
 
 ```python
 import pandas as pd
-from pynvl import pd_sign, pd_nvl, pd_nvl2, pd_noneif, pd_decode
+from pynvl import pd_sign, pd_nvl, pd_nvl2, pd_noneif, pd_decode, pd_coalesce
 
 s = pd.Series([-5, 0, 3, None])
 
@@ -162,5 +186,11 @@ print(pd_noneif(s, 0).tolist())
 
 print(pd_decode(s, -5, "neg", 0, "zero", 3, "pos", default="other").tolist())
 # ['neg', 'zero', 'pos', 'other']
+
+a = pd.Series([None, 2, None, 4])
+b = pd.Series([1, None, 3, None])
+c = pd.Series([9, 9, 9, 9])
+out = pd_coalesce(a, b, c)
+# [1, 2, 3, 4]
 ```
 

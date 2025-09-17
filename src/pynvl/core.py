@@ -1,6 +1,6 @@
-from typing import Any
+from typing import Any, Final
 
-__all__ = ["nvl", "decode", "sign", "noneif", "nvl2"]
+__all__: Final = ("nvl", "decode", "sign", "noneif", "nvl2", "coalesce")
 
 
 def nvl(expr, default):
@@ -74,3 +74,10 @@ def nvl2(expr: Any, value_if_not_null: Any, value_if_null: Any) -> Any:
         return value_if_not_null
     else:
         return value_if_null
+
+
+def coalesce(*args: Any) -> Any:
+    for item in args:
+        if item is not None:
+            return item
+    return None

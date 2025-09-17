@@ -1,7 +1,7 @@
 import pandas as pd
 from typing import Any
 
-__all__ = ["pd_sign", "pd_nvl", "pd_nvl2", "pd_noneif", "pd_decode"]
+__all__ = ["pd_sign", "pd_nvl", "pd_nvl2", "pd_noneif", "pd_decode", "pd_coalesce"]
 
 # Sentinel to detect whether default was actually provided in pd_decode
 _MISSING = object()
@@ -68,7 +68,8 @@ def pd_decode(series: pd.Series, *pairs: Any, default: Any = _MISSING) -> pd.Ser
     else:
         base_value = None
 
-    out = pd.Series(base_value, index=series.index, dtype="object")
+    # out = pd.Series(base_value, index=series.index, dtype="object")
+    out = pd.Series([base_value] * len(series), index=series.index, dtype="object")
 
     # Apply each (search, result) pair in order
     for i in range(0, n, 2):
@@ -80,3 +81,22 @@ def pd_decode(series: pd.Series, *pairs: Any, default: Any = _MISSING) -> pd.Ser
         out.loc[matches] = result
 
     return out
+
+
+def pd_coalesce(*series_list: pd.Series) -> pd.Series:
+    """
+    Return a Series where each element is the first non-null value across the given input Series.
+    """
+    if not series_list:
+        raise ValueError("pd_coalesce requires at least one Series")
+
+    # Start with the first series
+    result = series_list[0].astype("object").copy()
+
+    for s in series_list[1:]:
+        if not isinstance(s, pd.Series):
+            raise TypeError("pd_coalesce expects only pandas Series arguments")
+        mask = result.isna()
+        result.loc[mask] = s[mask].astype("object")
+
+    return result
