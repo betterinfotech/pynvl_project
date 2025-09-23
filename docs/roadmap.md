@@ -8,14 +8,16 @@ Here are the planned enhancements and future directions.
 ## 🔹 Core Functions
 - Initial helpers: `nvl`, `decode`, `sign`, `noneif`, `nvl2`
 -  Add more PL/SQL-inspired helpers:
-- `extract`, `extract_xml`
+- `extract_xml`
 
 ---
 
 ## 🔹 Pandas Integration
 - `pd_nvl(series, default)` => fill `NaN`/`None` with default  
 - `pd_decode(series, mapping, default)` => map values with fallback  
-- `pd_sign(series)` => vectorized numeric sign  
+- `pd_sign(series)` => vectorized numeric sign
+- `pd_noneif(series)`
+- `pd_nvl2(series)`
 
 ---
 

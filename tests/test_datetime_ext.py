@@ -5,7 +5,7 @@ import pytest
 import pynvl.datetime_ext as de
 
 
-D = dt.datetime(2025, 1, 8, 15, 4, 5, 123456)   # Wed, 08-Jan-2025
+D = dt.datetime(2025, 1, 8, 15, 4, 5, 123456)  # Wed, 08-Jan-2025
 D_NOON = dt.datetime(2025, 1, 8, 12, 0, 0, 0)
 D_MIDNIGHT = dt.datetime(2025, 1, 8, 0, 0, 0, 0)
 D_ENDDAY = dt.datetime(2025, 1, 8, 23, 59, 59, 999999)
@@ -21,6 +21,7 @@ D_DEC31 = dt.datetime(2025, 12, 31)
 # Known JDN reference (Gregorian): 2000-01-01 -> 2451545
 D_Y2K = dt.datetime(2000, 1, 1)
 
+
 # ----- basic composition -----
 def test_basic_compose():
     assert de.extract(D, "yyyy-mm-dd hh24:mi:ss.ff") == "2025-01-08 15:04:05.123456"
@@ -30,20 +31,23 @@ def test_basic_compose():
 
 
 # ----- Case check for (mon/month/day/dy) -----
-@pytest.mark.parametrize("fmt,expected", [
-    ("mon", "jan"),
-    ("Mon", "Jan"),
-    ("MON", "JAN"),
-    ("month", "january"),
-    ("Month", "January"),
-    ("MONTH", "JANUARY"),
-    ("dy", "wed"),
-    ("Dy", "Wed"),
-    ("DY", "WED"),
-    ("day", "wednesday"),
-    ("Day", "Wednesday"),
-    ("DAY", "WEDNESDAY"),
-])
+@pytest.mark.parametrize(
+    "fmt,expected",
+    [
+        ("mon", "jan"),
+        ("Mon", "Jan"),
+        ("MON", "JAN"),
+        ("month", "january"),
+        ("Month", "January"),
+        ("MONTH", "JANUARY"),
+        ("dy", "wed"),
+        ("Dy", "Wed"),
+        ("DY", "WED"),
+        ("day", "wednesday"),
+        ("Day", "Wednesday"),
+        ("DAY", "WEDNESDAY"),
+    ],
+)
 def test_casing_tokens(fmt, expected):
     # Put the token in a context to ensure only token is replaced
     assert de.extract(D, fmt) == expected
@@ -52,9 +56,9 @@ def test_casing_tokens(fmt, expected):
 # ----- numeric fields -----
 def test_years_slices():
     assert de.extract(D, "yyyy") == "2025"
-    assert de.extract(D, "yyy")  == "025"
-    assert de.extract(D, "yy")   == "25"
-    assert de.extract(D, "y")    == "5"
+    assert de.extract(D, "yyy") == "025"
+    assert de.extract(D, "yy") == "25"
+    assert de.extract(D, "y") == "5"
 
 
 def test_month_day_numeric():
@@ -65,9 +69,9 @@ def test_month_day_numeric():
 
 def test_time_fields_and_fraction():
     assert de.extract(D, "hh24") == "15"
-    assert de.extract(D, "hh12") == "03"      # 15 -> 3 PM
-    assert de.extract(D_NOON, "hh12") == "12" # noon -> 12
-    assert de.extract(D_MIDNIGHT, "hh12") == "12" # midnight -> 12
+    assert de.extract(D, "hh12") == "03"  # 15 -> 3 PM
+    assert de.extract(D_NOON, "hh12") == "12"  # noon -> 12
+    assert de.extract(D_MIDNIGHT, "hh12") == "12"  # midnight -> 12
     assert de.extract(D, "mi") == "04"
     assert de.extract(D, "ss") == "05"
     out = de.extract(D, "ff")
@@ -95,10 +99,12 @@ def test_week_of_month_w():
 
 
 def test_iso_week_iw_matches_python_isocalendar():
-    for sample in [dt.datetime(2025, 1, 1),
-                   dt.datetime(2025, 12, 31),
-                   dt.datetime(2024, 12, 30),  # ISO week overlaps
-                   dt.datetime(2026, 1, 4)]:
+    for sample in [
+        dt.datetime(2025, 1, 1),
+        dt.datetime(2025, 12, 31),
+        dt.datetime(2024, 12, 30),  # ISO week overlaps
+        dt.datetime(2026, 1, 4),
+    ]:
         _, iso_week, _ = sample.isocalendar()
         assert de.extract(sample, "iw") == f"{iso_week:02d}"
 
@@ -108,13 +114,14 @@ def test_weekday_d_mon1_sun7():
     assert de.extract(MONDAY, "d") == "1"
     assert de.extract(SUNDAY, "d") == "7"
 
+
 # ----- ISO year family (iyyy/iyy/iy/i) -----
 def test_iso_year_family():
     y, w, wd = D.isocalendar()
     assert de.extract(D, "iyyy") == f"{y:04d}"
-    assert de.extract(D, "iyy")  == f"{y % 1000:03d}"
-    assert de.extract(D, "iy")   == f"{y % 100:02d}"
-    assert de.extract(D, "i")    == f"{y % 10}"
+    assert de.extract(D, "iyy") == f"{y % 1000:03d}"
+    assert de.extract(D, "iy") == f"{y % 100:02d}"
+    assert de.extract(D, "i") == f"{y % 10}"
 
 
 # ----- quarter, roman month -----
@@ -139,19 +146,25 @@ def test_jdn_increments_by_one_per_day():
 
 # ----- literal text and non-tokens stay intact -----
 def test_literals_and_non_tokens():
-    assert de.extract(D, "Report for dd/mon/yyyy at hh24:mi") == "Report for 08/jan/2025 at 15:04"
+    assert (
+        de.extract(D, "Report for dd/mon/yyyy at hh24:mi")
+        == "Report for 08/jan/2025 at 15:04"
+    )
     # Unknown token 'abc' should pass through unchanged
     assert de.extract(D, "yyyy-abc-dd") == "2025-abc-08"
 
 
 # ----- case-insensitive token matching, but case applied from pattern -----
-@pytest.mark.parametrize("fmt,expected", [
-    ("dd-mon-yyyy", "08-jan-2025"),
-    ("dd-Mon-YYYY", "08-Jan-2025"),
-    ("DD-MON-YYYY", "08-JAN-2025"),
-    ("dd-month-yyyy", "08-january-2025"),
-    ("dd-Month-yyyy", "08-January-2025"),
-    ("DD-MONTH-YYYY", "08-JANUARY-2025"),
-])
+@pytest.mark.parametrize(
+    "fmt,expected",
+    [
+        ("dd-mon-yyyy", "08-jan-2025"),
+        ("dd-Mon-YYYY", "08-Jan-2025"),
+        ("DD-MON-YYYY", "08-JAN-2025"),
+        ("dd-month-yyyy", "08-january-2025"),
+        ("dd-Month-yyyy", "08-January-2025"),
+        ("DD-MONTH-YYYY", "08-JANUARY-2025"),
+    ],
+)
 def test_case_insensitive_match_case_applied(fmt, expected):
     assert de.extract(D, fmt) == expected

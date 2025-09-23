@@ -11,7 +11,7 @@ from pynvl import nvl
 print(nvl(None, 5))      # 5
 print(nvl("hello", 99))  # 'hello'
 
-# Nesting - Use email if exists, fallback to phone then office. Show 'No contacts if all are None.
+# Nesting - Use email if exists, fallback to phone then office.
 email = phone = office = office_extension = None
 
 # Core Python - If-elif bloat
@@ -39,7 +39,6 @@ print(sign(-5))  # -1
 print(sign(0))   # 0
 print(sign(9))   # 1
 
-# Simplified expressions
 balance = 500
 
 # Core Python - If-elif bloat
@@ -67,7 +66,6 @@ print(decode("A", "A", "Alpha", "B", "Beta", default="Unknown")) # 'Alpha'
 print(decode("Z", "A", "Alpha", "B", "Beta", "Fallback")) # 'Fallback'
 print(decode("Z", "A", "Alpha", "B", "Beta")) # None
 
-# Remove multiple if-elif tests - Clean and easy to read
 status_code = None
 
 # Core Python - If-elif bloat
@@ -110,7 +108,10 @@ backup = "alice@example.com"
 if backup == primary:
     contact_if = primary
 else:
-    contact_if = backup if backup is not None else primary
+    if backup is not None:
+        contact_if = backup
+    else:
+        contact_if = primary
 
 # With pynvl
 contact = noneif(backup, primary) or primary # alice@example.com
@@ -163,6 +164,52 @@ elif mac_address is not None:
 address = coalesce(port_address, ip_address, mac_address) # "A1:B2:C3:D4:E5:F6" 
 ```
 ---
+
+## 🔹 EXTRACT
+## Returns a formatted string from a datetime object.
+## Merges Oracle TO_CHAR() and EXTRACT() to give more intuitive date handling.
+### `EXTRACT( expr1, expr2, ..., expr_n)`
+```python
+from pynvl import extract
+from datetime import datetime as dt
+
+today = dt.today()
+# Core Python
+print(today.strftime("%B").upper())  # e.g. "SEPTEMBER"
+
+# With pynvl
+print(extract(today, 'MONTH'))  # e.g. "SEPTEMBER"
+"""
+| Parameter    | Explanation                                                                 |
+|--------------|-----------------------------------------------------------------------------|
+| YEAR         | Year, spelled out                                                           |
+| YYYY         | 4-digit year                                                                |
+| YYY / YY / Y | Last 3, 2, or 1 digit(s) of year                                         |
+| IYY / IY / I | Last 3, 2, or 1 digit(s) of ISO year                                     |
+| IYYY         | 4-digit year based on the ISO standard                                      |
+| Q            | Quarter of year (1, 2, 3, 4; JAN–MAR = 1)                                   |
+| MM           | Month (01–12; JAN = 01)                                                     |
+| MON          | Abbreviated name of month                                                   |
+| MONTH        | Name of month, padded with blanks to length of 9 characters                 |
+| RM           | Roman numeral month (I–XII; JAN = I)                                        |
+| WW           | Week of year (1–53), where week 1 starts on the first day of the year       |
+| W            | Week of month (1–5), where week 1 starts on the first day of the month      |
+| IW           | Week of year (1–52 or 1–53) based on the ISO standard                       |
+| D            | Day of week (1–7)                                                           |
+| DAY          | Name of day                                                                 |
+| DD           | Day of month (1–31)                                                         |
+| DDD          | Day of year (1–366)                                                         |
+| DY           | Abbreviated name of day                                                     |
+| J            | Julian day; number of days since January 1, 4712 BC                         |
+| HH           | Hour of day (1–12)                                                          |
+| HH12         | Hour of day (1–12)                                                          |
+| HH24         | Hour of day (0–23)                                                          |
+| MI           | Minute (0–59)                                                               |
+| SS           | Second (0–59)                                                               |
+| SSSSS        | Seconds past midnight (0–86399)                                             |
+| FF           | Fractional seconds                                                          |
+"""
+```
 
 ## 🔹 Pandas Integration
 

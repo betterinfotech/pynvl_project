@@ -31,6 +31,7 @@ __all__ = (
     "pd_noneif",
     "pd_decode",
     "pd_coalesce",
+    "extract",
 )
 
 # ---- Pandas helpers: real if pandas is installed, stubs otherwise ----
@@ -49,3 +50,6 @@ except Exception:
     pd_noneif = _requires_pandas
     pd_decode = _requires_pandas
     pd_coalesce = _requires_pandas()
+
+# ---- Datetime helpers ----
+from .datetime_ext import extract  # exposes extract(dt, fmt) at top level
