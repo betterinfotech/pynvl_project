@@ -12,12 +12,12 @@ This package contains a suite of functions which flatten out data handling opera
 ## 🔹 Features
 
 - `nvl(expr, default)` => Substitute a value when `None` is encountered
-- `decode(expr, search1, result1, ..., default)` => if-elif-else functionality  
+- `decode(expr, search1, result1, ..., default)` => if-elif-else functionality.  
 - `sign(n)` => Returns a value indicating the sign of a number
 - `noneif(expr1, expr2)` => If expr1 and expr2 are equal then return None
-- `nvl2(expr, value_if_not_null, value_if_null)` => Extending NVL to substitute when non-None value is encountered
-- `decode(None, None, ...)` treats `None == None` (follows PL/SQL)
+- `nvl2(expr, value_if_not_null, value_if_null)` => Extends `nvl`
 - `coalesce(expr1, expr2, ..., expr_n)` => Returns first non-None value in list
+- `extract(datetime)` => Extracts a value from a datetime object
 - Fully tested with `pytest`  
 - MIT Licensed  
 
