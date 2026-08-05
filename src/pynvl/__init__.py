@@ -36,8 +36,17 @@ __all__ = (
 
 # ---- Pandas helpers: real if pandas is installed, stubs otherwise ----
 try:
-    from .pandas_ext import pd_decode, pd_noneif, pd_nvl, pd_nvl2, pd_sign
-except Exception:
+    from .pandas_ext import (
+        pd_coalesce,
+        pd_decode,
+        pd_noneif,
+        pd_nvl,
+        pd_nvl2,
+        pd_sign,
+    )
+except ModuleNotFoundError as exc:
+    if exc.name != "pandas":
+        raise
 
     def _requires_pandas(*_args, **_kwargs):
         raise ImportError(
@@ -49,7 +58,7 @@ except Exception:
     pd_nvl2 = _requires_pandas
     pd_noneif = _requires_pandas
     pd_decode = _requires_pandas
-    pd_coalesce = _requires_pandas()
+    pd_coalesce = _requires_pandas
 
 # ---- Datetime helpers ----
 from .datetime_ext import extract  # exposes extract(dt, fmt) at top level
