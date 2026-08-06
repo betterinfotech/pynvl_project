@@ -16,5 +16,6 @@ theme:
 nav:
   - Home: index.md
   - Installation: install.md
+  - Document text extraction: documents.md
   - Roadmap: roadmap.md
   - Contributing: contributing.md

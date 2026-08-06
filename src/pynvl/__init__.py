@@ -2,9 +2,11 @@
 pynvl: Oracle-inspired functions for Python.
 Core: nvl, decode, sign, noneif, nvl2, coalesce
 Pandas (optional): pd_sign, pd_nvl, pd_nvl2, pd_noneif, pd_decode, pd_coalesce
+Documents: utl_to_text
 """
 
-from importlib.metadata import PackageNotFoundError, version as _version
+from importlib.metadata import PackageNotFoundError
+from importlib.metadata import version as _version
 
 # ---- Package metadata ----
 try:
@@ -19,19 +21,21 @@ from .core import coalesce, decode, noneif, nvl, nvl2, sign
 
 # ---- Public API list (single assignment; no mutation) ----
 __all__ = (
-    "nvl",
-    "decode",
-    "sign",
-    "noneif",
-    "nvl2",
+    "UnsupportedDocumentFormatError",
     "coalesce",
-    "pd_sign",
+    "decode",
+    "extract",
+    "noneif",
+    "nvl",
+    "nvl2",
+    "pd_coalesce",
+    "pd_decode",
+    "pd_noneif",
     "pd_nvl",
     "pd_nvl2",
-    "pd_noneif",
-    "pd_decode",
-    "pd_coalesce",
-    "extract",
+    "pd_sign",
+    "sign",
+    "utl_to_text",
 )
 
 # ---- Pandas helpers: real if pandas is installed, stubs otherwise ----
@@ -62,3 +66,6 @@ except ModuleNotFoundError as exc:
 
 # ---- Datetime helpers ----
 from .datetime_ext import extract  # exposes extract(dt, fmt) at top level
+
+# ---- Document helpers ----
+from .document_ext import UnsupportedDocumentFormatError, utl_to_text
