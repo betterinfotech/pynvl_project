@@ -300,8 +300,14 @@ def _extract_markdown(data: str | bytes, encoding: str) -> str:
     text = re.sub(r"(?m)^[ \t]*>[ \t]?", "", text)
     text = re.sub(r"(?m)^[ \t]*(?:[-+*]|\d+[.)])[ \t]+", "", text)
     text = re.sub(r"(?m)^[ \t]*(?:-{3,}|_{3,}|\*{3,})[ \t]*$", "", text)
-    text = re.sub(r"(?<!\\)(?:\*\*|__)(.+?)(?:\*\*|__)", r"\1", text)
-    text = re.sub(r"(?<!\\)(?:\*|_)(.+?)(?:\*|_)", r"\1", text)
+    text = re.sub(r"(?<!\\)\*\*(.+?)\*\*", r"\1", text)
+    text = re.sub(
+        r"(?<![\w\\])__(?=\S)((?:(?!__).)+?)(?<=\S)__(?![\w.])",
+        r"\1",
+        text,
+    )
+    text = re.sub(r"(?<!\\)\*(.+?)\*", r"\1", text)
+    text = re.sub(r"(?<![\w\\])_(?!_)(?=\S)(.+?)(?<=\S)_(?![\w_])", r"\1", text)
     text = re.sub(r"(?<!\\)`([^`]+)`", r"\1", text)
     text = re.sub(
         r"(?m)^[ \t]*\|?[ \t]*:?-{3,}:?[ \t]*(?:\|[ \t]*:?-{3,}:?[ \t]*)+\|?[ \t]*$",

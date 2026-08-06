@@ -119,6 +119,18 @@ This is **important** and [documented](https://example.test).
     )
 
 
+@pytest.mark.parametrize(
+    "identifier",
+    ["utl_to_text", "DBMS_VECTOR_CHAIN", "__init__.py", "snake_case_identifier"],
+)
+def test_markdown_cleanup_preserves_underscores_in_identifiers(identifier):
+    markdown = f"Use `{identifier}` with _emphasis_ and __strong__ text."
+
+    assert utl_to_text(markdown, content_type="text/markdown") == (
+        f"Use {identifier} with emphasis and strong text."
+    )
+
+
 @pytest.mark.parametrize("source", ["", b"", StringIO("")])
 def test_empty_valid_document_returns_empty_string(source):
     assert utl_to_text(source) == ""
