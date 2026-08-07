@@ -18,6 +18,7 @@ This package contains a suite of functions which flatten out data handling opera
 - `nvl2(expr, value_if_not_null, value_if_null)` => Extends `nvl`
 - `coalesce(expr1, expr2, ..., expr_n)` => Returns first non-None value in list
 - `extract(datetime)` => Extracts a value from a datetime object
+- `utl_to_text(source, ...)` => Extracts readable text from common document formats
 - Fully tested with `pytest`  
 - MIT Licensed  
 
@@ -54,6 +55,15 @@ print(pd_decode(s, -5, "neg", 0, "zero", 3, "pos", default="other").tolist())
 ```bash
 pip install pynvl-lib
 ```
+
+Install optional PDF and DOCX extraction support with:
+
+```bash
+pip install "pynvl-lib[documents]"
+```
+
+See [Document text extraction](documents.md) for supported inputs, examples, and
+limitations.
 ---
 
 ## 🔹 [Demo page](demo.md)

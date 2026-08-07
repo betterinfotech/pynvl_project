@@ -21,3 +21,7 @@ pyyaml_env_tag==1.0
 # Optional: type stubs for better typing (esp. with Pandas later)
 types-setuptools
 types-pytz
+
+# Optional document extraction integration tests
+pypdf>=5.0.0
+python-docx>=1.1.0

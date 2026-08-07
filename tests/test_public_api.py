@@ -1,7 +1,7 @@
 import os
-from pathlib import Path
 import subprocess
 import sys
+from pathlib import Path
 
 import pynvl
 
@@ -40,6 +40,25 @@ for name in (
         assert "pandas is required" in str(exc)
     else:
         raise AssertionError(f"{name} did not raise ImportError")
+"""
+
+    subprocess.run(
+        [sys.executable, "-S", "-c", command],
+        check=True,
+        env=env,
+        cwd=src_dir.parent,
+    )
+
+
+def test_package_imports_without_optional_document_dependencies():
+    src_dir = Path(__file__).parents[1] / "src"
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(src_dir)
+    command = """
+import pynvl
+
+assert pynvl.utl_to_text("plain text") == "plain text"
+assert "utl_to_text" in pynvl.__all__
 """
 
     subprocess.run(
