@@ -3,30 +3,31 @@
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/betterinfotech/pynvl_project/blob/main/LICENSE)
 [![PyPI](https://img.shields.io/pypi/v/pynvl-lib.svg)](https://pypi.org/project/pynvl-lib/)
 
-**General purpose data utilities, inspired by PL/SQL.**
+`pynvl` is an actively maintained Python library that brings familiar,
+Oracle-inspired data utilities to Python applications. It combines predictable
+scalar and pandas helpers with document text extraction for modern search and
+AI-enabled data pipelines.
 
-This package contains a suite of functions which flatten out data handling operations.  
+## Features
 
----
+- `nvl(expr, default)` — substitutes a value when `None` is encountered
+- `decode(expr, search1, result1, ..., default)` — provides concise conditional mapping
+- `sign(n)` — returns a value indicating the sign of a number
+- `noneif(expr1, expr2)` — returns `None` when two expressions are equal
+- `nvl2(expr, value_if_not_null, value_if_null)` — extends `nvl`
+- `coalesce(expr1, expr2, ..., expr_n)` — returns the first non-`None` value
+- `extract(datetime, fmt)` — extracts formatted values from datetime objects
+- `utl_to_text(source, ...)` — extracts readable text from common document formats
 
-## 🔹 Features
+`utl_to_text`, inspired by Oracle AI Database's
+`DBMS_VECTOR_CHAIN.UTL_TO_TEXT`, normalizes documents into text suitable for
+chunking, retrieval, LLM, and RAG workflows. It does not perform embedding or
+model inference itself.
 
-- `nvl(expr, default)` => Substitute a value when `None` is encountered
-- `decode(expr, search1, result1, ..., default)` => if-elif-else functionality.  
-- `sign(n)` => Returns a value indicating the sign of a number
-- `noneif(expr1, expr2)` => If expr1 and expr2 are equal then return None
-- `nvl2(expr, value_if_not_null, value_if_null)` => Extends `nvl`
-- `coalesce(expr1, expr2, ..., expr_n)` => Returns first non-None value in list
-- `extract(datetime)` => Extracts a value from a datetime object
-- `utl_to_text(source, ...)` => Extracts readable text from common document formats
-- Fully tested with `pytest`  
-- MIT Licensed  
+## Pandas integration
 
----
-
-## 🔹 Pandas Integration
-
-`pynvl` also provides optional pandas-native helpers for use with `pd.Series` and operates element-wise.
+`pynvl` provides optional pandas-native helpers that operate element-wise on
+`pd.Series` values.
 
 ```python
 import pandas as pd
@@ -49,9 +50,9 @@ print(pd_noneif(s, 0).tolist())
 print(pd_decode(s, -5, "neg", 0, "zero", 3, "pos", default="other").tolist())
 # ['neg', 'zero', 'pos', 'other']
 ```
----
 
-## 🔹 Installation From PyPI
+## Installation from PyPI
+
 ```bash
 pip install pynvl-lib
 ```
@@ -63,7 +64,4 @@ pip install "pynvl-lib[documents]"
 ```
 
 See [Document text extraction](documents.md) for supported inputs, examples, and
-limitations.
----
-
-## 🔹 [Demo page](demo.md)
+limitations, or visit the [demo page](demo.md) for additional examples.
