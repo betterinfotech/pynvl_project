@@ -5,31 +5,50 @@
 [![PyPI](https://img.shields.io/pypi/v/pynvl-lib.svg)](https://pypi.org/project/pynvl-lib/)
 [![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-success)](https://betterinfotech.github.io/pynvl_project/)
 
-**General purpose data utilities, inspired by PL/SQL.**
+`pynvl` is an actively maintained, open-source Python library for familiar
+data-handling operations inspired by Oracle SQL and PL/SQL. It provides small,
+predictable utilities for scalar values and pandas data, together with document
+text extraction designed to prepare common formats for search, chunking, embedding,
+and other AI-enabled workflows.
 
----
+The package keeps its core dependency-free, exposes a documented top-level API,
+and uses optional dependencies only where document formats require them.
 
-## 🔹 Installation
+## Features
 
-```python
+- Oracle-inspired helpers including `nvl`, `nvl2`, `decode`, `coalesce`,
+  `noneif`, `sign`, and datetime `extract`
+- Optional pandas-native equivalents for element-wise data processing
+- `utl_to_text` extraction for plain text, Markdown, HTML, XML, JSON, PDF, and DOCX
+- Format detection across paths, content strings, bytes, and file-like objects
+- A pytest test suite, type checking, linting, published documentation, and CI
+
+## Installation
+
+```bash
 pip install pynvl-lib
 ```
----
 
-## 🔹 Quick Examples
+Install optional PDF and DOCX support with:
+
+```bash
+pip install "pynvl-lib[documents]"
+```
+
+## Quick examples
 
 ```python
-from pynvl import nvl, decode, sign
+from pynvl import decode, nvl, sign
 
-print(nvl(None, 5))     # 5
-print(sign(-7))         # -1
-print(decode("A", "A", "Alpha", "B", "Beta", default="Unknown")) # 'Alpha'
+print(nvl(None, 5))  # 5
+print(sign(-7))  # -1
+print(decode("A", "A", "Alpha", "B", "Beta", default="Unknown"))  # 'Alpha'
 ```
 
 ## Document text extraction
 
-`utl_to_text` provides one Pythonic API for extracting readable text from plain
-text, Markdown, HTML, XML, JSON, PDF, and DOCX input:
+`utl_to_text` provides one Pythonic API for extracting readable text from
+common structured and document formats:
 
 ```python
 from pynvl import utl_to_text
@@ -42,16 +61,11 @@ text = utl_to_text(
 )
 ```
 
-PDF and DOCX support use optional dependencies:
-
-```bash
-pip install "pynvl-lib[documents]"
-```
-
-The function is inspired by Oracle `DBMS_VECTOR_CHAIN.UTL_TO_TEXT`, but it is
-not an Oracle Text implementation and does not guarantee identical extraction
+The API is inspired by Oracle AI Database's
+`DBMS_VECTOR_CHAIN.UTL_TO_TEXT`. It is a practical Python implementation, not
+an Oracle Text implementation, and does not guarantee identical extraction
 output. It does not perform OCR, download URLs, or support legacy Office or
 password-protected documents.
 
----
-## 🔹 Full documentation: [Docs site](https://betterinfotech.github.io/pynvl_project/)
+See the [full documentation](https://betterinfotech.github.io/pynvl_project/)
+for the public API, supported inputs, format behavior, and limitations.
